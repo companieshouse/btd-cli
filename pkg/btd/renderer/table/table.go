@@ -49,7 +49,6 @@ func (t *Table) Render(data btd.TagData) string {
 		Border(lipgloss.NormalBorder()).
 		BorderStyle(lipgloss.NewStyle().Foreground(lipgloss.Color("99"))).
 		StyleFunc(func(row, col int) lipgloss.Style {
-			// style := DefaultCellStyle
 			var style lipgloss.Style
 
 			switch {
