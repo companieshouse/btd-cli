@@ -55,8 +55,8 @@ func Execute() {
 func init() {
 	cobra.OnInitialize(initConfig)
 
-	rootCmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", "", "config file (default is $HOME/.btd-cli.toml)")
-	rootCmd.PersistentFlags().StringP("tag-map", "t", "", "Path to tag map file")
+	rootCmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", "", "config file path (default is $HOME/.btd-cli.toml)")
+	rootCmd.PersistentFlags().StringP("tag-map", "t", "", "path to tag map file")
 
 	viper.BindPFlag("tag-map", rootCmd.PersistentFlags().Lookup("tag-map"))
 	viper.SetDefault("tag-map", "tagmap.dat")

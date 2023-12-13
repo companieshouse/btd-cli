@@ -45,7 +45,7 @@ Examples:
   btd parse file <path>`,
 	Args: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		tagMap, err := btd.LoadTagMap(viper.GetString("tag-map"))
+		tagMap, err := btd.LoadTagMap(os.ExpandEnv(viper.GetString("tag-map")))
 		if err != nil {
 			return err
 		}

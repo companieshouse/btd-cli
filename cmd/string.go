@@ -24,6 +24,7 @@ package cmd
 import (
 	"errors"
 	"fmt"
+	"os"
 
 	"github.com/companieshouse/btd-cli/pkg/btd"
 	"github.com/companieshouse/btd-cli/pkg/btd/renderer/table"
@@ -43,7 +44,7 @@ Examples:
   btd parse string '...'`,
 	Args: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		tagMap, err := btd.LoadTagMap(viper.GetString("tag-map"))
+		tagMap, err := btd.LoadTagMap(os.ExpandEnv(viper.GetString("tag-map")))
 		if err != nil {
 			return err
 		}
