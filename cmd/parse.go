@@ -41,8 +41,8 @@ String arguments must be quoted (single or double) when using the 'data'
 subcommand.
 
 Examples:
-  btd parse data '...'
-  btd parse file <path>`,
+  btd-cli parse data '...'
+  btd-cli parse file <path>`,
 }
 
 func init() {

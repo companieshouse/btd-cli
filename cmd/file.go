@@ -42,7 +42,7 @@ human-readable output format. Each line within the file is assumed to contain a
 complete business transaction data string.
 	
 Examples:
-  btd parse file <path>`,
+  btd-cli parse file <path>`,
 	Args: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		tagMap, err := btd.LoadTagMap(os.ExpandEnv(viper.GetString("tag-map")))

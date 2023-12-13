@@ -41,7 +41,7 @@ into a human-readable output format. The string arguments must be quoted
 (single or double) when using this subcommand.
 
 Examples:
-  btd parse string '...'`,
+  btd-cli parse string '...'`,
 	Args: cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		tagMap, err := btd.LoadTagMap(os.ExpandEnv(viper.GetString("tag-map")))
