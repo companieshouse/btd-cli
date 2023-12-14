@@ -30,7 +30,7 @@ $ btd-cli <command> <subcommand> --help
 
 ### Parsing Data
 
-The `parse` command supports multiple subcommands for parsing business transaction data from different sources. These include `string` and `data` subcommands, which are described in more detail below.
+The `parse` command supports multiple subcommands for parsing business transaction data from different sources. These include `string` and `file` subcommands, which are described in more detail below.
 
 #### Parsing data strings
 
