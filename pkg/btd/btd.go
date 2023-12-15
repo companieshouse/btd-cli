@@ -112,12 +112,12 @@ func parseTag(r *strings.Reader, t *TagMap) ([]string, error) {
 		return nil, err
 	}
 
-	length_uint, err := strconv.ParseUint(string(length), 10, 32)
+	lengthUnit, err := strconv.ParseUint(string(length), 10, 32)
 	if err != nil {
 		return nil, fmt.Errorf("unable to parse length value for tag with id: %s", id)
 	}
 
-	data, err := parseData(r, uint(length_uint))
+	data, err := parseData(r, uint(lengthUnit))
 	if err != nil {
 		return nil, err
 	}

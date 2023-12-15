@@ -35,10 +35,10 @@ const (
 	lightGray = lipgloss.Color("241")
 )
 
-type ColumnId int
+type ColumnID int
 
 const (
-	idColumn ColumnId = iota
+	idColumn ColumnID = iota
 	xmlTagColumn
 	lengthColumn
 	dataColumn
@@ -56,8 +56,8 @@ func (t *Table) Render(data btd.TagData) string {
 	var (
 		HeaderStyle = re.NewStyle().Foreground(purple).Bold(true).Align(lipgloss.Center)
 
-		IdColumnStyle     = re.NewStyle().Width(6).Align(lipgloss.Center)
-		XmlTagColumnStyle = re.NewStyle().Width(20).Align(lipgloss.Center)
+		IDColumnStyle     = re.NewStyle().Width(6).Align(lipgloss.Center)
+		XMLTagColumnStyle = re.NewStyle().Width(20).Align(lipgloss.Center)
 		LengthColumnStyle = re.NewStyle().Width(8).Align(lipgloss.Center)
 		DataColumnStyle   = re.NewStyle().Width(40).MaxWidth(40).MaxHeight(100)
 
@@ -81,11 +81,11 @@ func (t *Table) Render(data btd.TagData) string {
 				style = style.Inherit(OddRowStyle)
 			}
 
-			switch ColumnId(col) {
+			switch ColumnID(col) {
 			case idColumn:
-				style = style.Inherit(IdColumnStyle)
+				style = style.Inherit(IDColumnStyle)
 			case xmlTagColumn:
-				style = style.Inherit(XmlTagColumnStyle)
+				style = style.Inherit(XMLTagColumnStyle)
 			case lengthColumn:
 				style = style.Inherit(LengthColumnStyle)
 			case dataColumn:
