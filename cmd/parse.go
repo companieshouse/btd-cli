@@ -31,7 +31,7 @@ var parseCmd = &cobra.Command{
 	Short: "Parse business transaction data into a human-readable format",
 	Long: `Parse the content of a file or command-line argument string containing
 business transaction data (BTD) into a human-readable output format. Use the
-subcommands 'file' or 'data' to read the transaction data from a file or string
+subcommands 'file' and 'string' to read the transaction data from a file or string
 argument respectively.
 
 When parsing the content of a file, each line within the file is assumed to
