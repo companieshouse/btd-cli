@@ -36,7 +36,7 @@ var (
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "btd",
+	Use:   "btd-cli",
 	Short: "A simple business transaction data (BTD) parser",
 	Long: `Generate human-readable output from business transaction data read
 from a file or command-line argument string.`,
