@@ -23,6 +23,7 @@ package btd
 
 import (
 	"bufio"
+	"errors"
 	"fmt"
 	"io"
 	"os"
@@ -31,12 +32,24 @@ import (
 	"strings"
 )
 
-type TagMap struct {
+type TagMap interface {
+	ParseTagData(data string) (TagData, error)
+	GetTagName(id string) (string, error)
+	LoadTagMap(path string) (*TagMap, error)
+	LoadedFromFile() string
+}
+
+type tagMapData struct {
 	mappings map[string]string
 	path     string
 }
 
-func (t *TagMap) ParseTagData(data string) (TagData, error) {
+func (t *tagMapData) ParseTagData(data string) (TagData, error) {
+
+	if len(data) == 0 {
+		return nil, errors.New("data string cannot be empty")
+	}
+
 	var tagData TagData
 	r := strings.NewReader(data)
 
@@ -56,19 +69,26 @@ func (t *TagMap) ParseTagData(data string) (TagData, error) {
 	return tagData, nil
 }
 
-func (t *TagMap) GetTagName(id string) (string, error) {
+func (t *tagMapData) GetTagName(id string) (string, error) {
+	if len(id) == 0 {
+		return "", errors.New("id cannot be empty")
+	}
+
 	name, ok := t.mappings[id]
 	if !ok {
-		return "", fmt.Errorf("no tag for id: %s", id)
+		return "", fmt.Errorf("unknown id: %s", id)
 	}
 	return name, nil
 }
 
 type TagData [][]string
 
-func LoadTagMap(path string) (*TagMap, error) {
+func LoadTagMap(path string) (*tagMapData, error) {
+	tagMap := &tagMapData{make(map[string]string), path}
 
-	tagMap := &TagMap{make(map[string]string), path}
+	if len(path) == 0 {
+		return nil, errors.New("path cannot be empty")
+	}
 
 	fp, err := os.Open(path)
 	if err != nil {
@@ -97,29 +117,33 @@ func LoadTagMap(path string) (*TagMap, error) {
 	return tagMap, nil
 }
 
-func (t *TagMap) LoadedFromFile() string {
+func (t *tagMapData) LoadedFromFile() string {
 	return t.path
 }
 
-func parseTag(r *strings.Reader, t *TagMap) ([]string, error) {
+func parseTag(r *strings.Reader, t *tagMapData) ([]string, error) {
 	id, err := parseData(r, 4)
 	if err != nil {
-		return nil, err
+		return nil, errors.New("reached EOF before parsing ID field")
+	}
+
+	if _, err := parseUIntValue(id); err != nil {
+		return nil, fmt.Errorf("found non-numeric id field: %s", id)
 	}
 
 	length, err := parseData(r, 4)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("reached EOF before parsing length field for tag with id: %s", id)
 	}
 
-	lengthUnit, err := strconv.ParseUint(string(length), 10, 32)
+	lengthUnit, err := parseUIntValue(length)
 	if err != nil {
-		return nil, fmt.Errorf("unable to parse length value for tag with id: %s", id)
+		return nil, fmt.Errorf("found non-numeric length field for tag with id %s: %s", id, length)
 	}
 
 	data, err := parseData(r, uint(lengthUnit))
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("reached EOF before parsing data field for tag with id: %s", id)
 	}
 
 	tag, err := t.GetTagName(id)
@@ -138,9 +162,18 @@ func parseTag(r *strings.Reader, t *TagMap) ([]string, error) {
 func parseData(r *strings.Reader, length uint) (string, error) {
 	data := make([]byte, length)
 	n, err := r.Read(data)
-	if err == io.EOF {
-		return "", fmt.Errorf("reached EOF before parsing data")
+	if err == io.EOF || n < int(length) {
+		return "", fmt.Errorf("not enough data remaining to read bytes: %d", length)
 	}
 
 	return string(data[:n]), nil
+}
+
+func parseUIntValue(data string) (uint64, error) {
+	num, err := strconv.ParseUint(data, 10, 32)
+	if err != nil {
+		return 0, errors.New("unable to parse UInt value")
+	}
+
+	return num, nil
 }

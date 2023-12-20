@@ -1,4 +1,5 @@
-bin ?= btd-cli
+bin   ?= btd-cli
+tests ?= ./...
 
 .EXPORT_ALL_VARIABLES:
 GO111MODULE = on
@@ -19,7 +20,7 @@ test: test-unit test-integration
 
 .PHONY: test-unit
 test-unit:
-	$(warning $@ unimplemented)
+	go test -v $(tests) -run 'Unit'
 
 .PHONY: test-integration
 test-integration:
