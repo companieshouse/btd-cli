@@ -51,20 +51,18 @@ Examples:
 
 		fmt.Println("Using tag map:", tagMap.LoadedFromFile())
 
-		arg := args[0]
+		path := args[0]
 
-		if len(arg) <= 0 {
+		if len(path) <= 0 {
 			return errors.New("business transaction data string cannot be empty")
 		}
 
-		var r btd.Renderer = table.New()
-
-		data, err := tagMap.ParseTagData(arg)
+		data, err := tagMap.ParseTagData(path)
 		if err != nil {
 			return err
 		}
 
-		fmt.Println(r.Render(data))
+		fmt.Println(table.New().Render(data))
 
 		return nil
 	},

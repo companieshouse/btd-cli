@@ -52,15 +52,13 @@ Examples:
 
 		fmt.Println("Using tag map:", tagMap.LoadedFromFile())
 
-		arg := args[0]
+		path := args[0]
 
-		if len(arg) <= 0 {
+		if len(path) <= 0 {
 			return errors.New("filename cannot be empty")
 		}
 
-		var r btd.Renderer = table.New()
-
-		file, err := os.Open(arg)
+		file, err := os.Open(path)
 		if err != nil {
 			return err
 		}
@@ -77,8 +75,8 @@ Examples:
 					return err
 				}
 
-				fmt.Printf("%v:%d:\n", arg, line)
-				fmt.Println(r.Render(data))
+				fmt.Printf("%v:%d:\n", path, line)
+				fmt.Println(table.New().Render(data))
 			}
 
 			line++
