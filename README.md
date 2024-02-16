@@ -6,6 +6,15 @@ A simple command-line tool for displaying business transaction data (BTD) in a h
 
 ## Installation
 
+Using [Homebrew](https://brew.sh):
+
+```shell
+$ brew tap companieshouse/homebrew-ch
+$ brew install btd-cli
+```
+
+Alternatively:
+
 ```shell
 $ go install github.com/companieshouse/btd-cli@latest
 ```
