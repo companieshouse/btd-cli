@@ -7,7 +7,7 @@ A simple command-line tool for displaying business transaction data (BTD) in a h
 ## Installation
 
 ```shell
-$ go install github.com/companieshouse/btd-cli
+$ go install github.com/companieshouse/btd-cli@latest
 ```
 
 ## Usage
