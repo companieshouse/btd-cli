@@ -20,7 +20,7 @@ func TestUnitLoadTagMapWithEmptyFilePath(t *testing.T) {
 				So(tagMap, ShouldBeNil)
 			})
 
-			Convey("The error should be describe the problem", func() {
+			Convey("The error should describe the problem", func() {
 				So(err, ShouldEqual, errors.New("path cannot be empty"))
 			})
 		})
@@ -38,7 +38,7 @@ func TestUnitLoadTagMapWithNonExistentFile(t *testing.T) {
 				So(tagMap, ShouldBeNil)
 			})
 
-			Convey("The error should be describe the problem", func() {
+			Convey("The error should describe the problem", func() {
 				So(err, ShouldEqual, fmt.Errorf("unable to read tag map file: %s", path))
 			})
 		})
@@ -63,7 +63,7 @@ func TestUnitLoadTagMapWithEmptyFile(t *testing.T) {
 				So(tagMap, ShouldBeNil)
 			})
 
-			Convey("The error should be describe the problem", func() {
+			Convey("The error should describe the problem", func() {
 				So(err, ShouldEqual, fmt.Errorf("no mappings in tag map file: %s", path))
 			})
 		})
