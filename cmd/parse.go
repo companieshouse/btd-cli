@@ -41,7 +41,7 @@ String arguments must be quoted (single or double) when using the 'data'
 subcommand.
 
 Examples:
-  btd-cli parse data '...'
+  btd-cli parse string '...'
   btd-cli parse file <path>`,
 }
 
