@@ -20,7 +20,7 @@ test: test-unit test-integration
 
 .PHONY: test-unit
 test-unit:
-	go test -v $(tests) -run 'Unit'
+	go test -v $(tests) -run 'Unit' -coverprofile coverage.out
 
 .PHONY: test-integration
 test-integration:
