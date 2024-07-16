@@ -50,6 +50,7 @@ Examples:
 			return err
 		}
 
+		fmt.Println("Using config file:", viper.ConfigFileUsed())
 		fmt.Println("Using tag map:", tagMap.LoadedFromFile())
 
 		path := args[0]
