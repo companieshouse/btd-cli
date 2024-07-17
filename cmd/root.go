@@ -22,7 +22,6 @@ THE SOFTWARE.
 package cmd
 
 import (
-	"fmt"
 	"os"
 	"path/filepath"
 
@@ -75,9 +74,8 @@ func initConfig() {
 
 	viper.AutomaticEnv()
 
-	if err := viper.ReadInConfig(); err == nil {
-		fmt.Fprintln(os.Stderr, "Using config file:", viper.ConfigFileUsed())
-	} else {
+	err := viper.ReadInConfig()
+	if err != nil {
 		switch err.(type) {
 		case viper.ConfigParseError:
 			cobra.CheckErr(err)
