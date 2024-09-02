@@ -88,7 +88,7 @@ For example, to set a default path for the tag map in the configuration file:
 tag-map = '$HOME/projects/chl-tuxedo/chtuxgw/config/tagmap.dat'
 ```
 
-## Updating the example gif image
+## Updating the example gif image
 
 To update the example `btd-cli.gif` image used in this `README.md` file using [VHS](https://github.com/charmbracelet/vhs):
 
