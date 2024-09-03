@@ -1,4 +1,5 @@
-# Configuration for VHS example session; https://github.com/charmbracelet/vhs
+# Configuration file for generating btd-cli.gif image using VHS
+# command-line tool (https://github.com/charmbracelet/vhs).
 #
 # To run:
 #  vhs < btd-cli.tape
