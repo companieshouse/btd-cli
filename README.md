@@ -93,11 +93,8 @@ tag-map = '$HOME/projects/chl-tuxedo/chtuxgw/config/tagmap.dat'
 To update the example `btd-cli.gif` image used in this `README.md` file using [VHS](https://github.com/charmbracelet/vhs):
 
 - Modify the `btd-cli.tape` configuration file if needed
-- Update the `btd-cli.gif` image by running:
-
-```shell
-vhs < btd-cli.tape
-```
+- Run `vhs < btd-cli.tape`
+- Commit the updated `btd-cli.gif` (and `btd-cli.tape` configuration file if modified) to source control
 
 ## License
 
