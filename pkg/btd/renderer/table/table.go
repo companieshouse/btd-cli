@@ -73,7 +73,7 @@ func (t *Table) Render(data btd.TagData) string {
 			var style lipgloss.Style
 
 			switch {
-			case row == 0:
+			case row == table.HeaderRow:
 				style = style.Inherit(HeaderStyle)
 			case row%2 == 0:
 				style = style.Inherit(EvenRowStyle)
