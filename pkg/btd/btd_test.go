@@ -406,13 +406,13 @@ func TestUnitGetMaxDataLength(t *testing.T) {
 		var tagData TagData = [][]string{
 			{
 				"0001",
-				"dummy",
+				"mock_tag_1",
 				"0004",
 				"abcd",
 			},
 			{
-				"0001",
-				"dummy",
+				"0002",
+				"mock_tag_2",
 				"0026",
 				"abcdefghijklmnopqrstuvwyxz",
 			},
