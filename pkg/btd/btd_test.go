@@ -421,7 +421,7 @@ func TestUnitGetMaxDataLength(t *testing.T) {
 		Convey("When checking the maximum data length", func() {
 			length := tagData.GetMaxDataLength()
 
-			Convey("The value should equal the longest data string", func() {
+			Convey("Then the value should equal the length of longest data string", func() {
 				So(length, ShouldEqual, 26)
 			})
 		})
