@@ -83,6 +83,17 @@ func (t *tagMapData) GetTagName(id string) (string, error) {
 
 type TagData [][]string
 
+func (t *TagData) GetMaxDataLength() int {
+	max_data_length := 0
+	for _, value := range *t {
+		if data_length := len(value[3]); data_length > max_data_length {
+			max_data_length = data_length
+		}
+	}
+
+	return max_data_length
+}
+
 func LoadTagMap(path string) (*tagMapData, error) {
 	tagMap := &tagMapData{make(map[string]string), path}
 
