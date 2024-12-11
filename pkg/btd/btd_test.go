@@ -400,3 +400,30 @@ func TestUnitParseTagDataWithValidDataString(t *testing.T) {
 		})
 	})
 }
+func TestUnitGetMaxDataLength(t *testing.T) {
+	Convey("Given a tag data slice containing valid data", t, func() {
+
+		var tagData TagData = [][]string{
+			{
+				"0001",
+				"dummy",
+				"0004",
+				"abcd",
+			},
+			{
+				"0001",
+				"dummy",
+				"0026",
+				"abcdefghijklmnopqrstuvwyxz",
+			},
+		}
+
+		Convey("When checking the maximum data length", func() {
+			length := tagData.GetMaxDataLength()
+
+			Convey("The value should equal the longest data string", func() {
+				So(length, ShouldEqual, 26)
+			})
+		})
+	})
+}
