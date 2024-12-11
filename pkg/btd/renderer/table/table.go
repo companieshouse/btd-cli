@@ -59,8 +59,8 @@ func (t *Table) Render(data btd.TagData) string {
 		IDColumnWidth     = 6
 		XMLTagColumnWidth = 20
 		LengthColumnWidth = 8
-		ColumnPadding     = 5
 		DataColumnWidth   = 40
+		ColumnPadding     = 5
 	)
 
 	if data.GetMaxDataLength() > DataColumnWidth {
