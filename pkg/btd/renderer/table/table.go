@@ -22,11 +22,13 @@ THE SOFTWARE.
 package table
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/charmbracelet/lipgloss"
 	"github.com/charmbracelet/lipgloss/table"
 	"github.com/companieshouse/btd-cli/pkg/btd"
+	"golang.org/x/term"
 )
 
 const (
@@ -54,12 +56,29 @@ func (t *Table) Render(data btd.TagData) string {
 	re := lipgloss.NewRenderer(os.Stdout)
 
 	var (
+		IDColumnWidth     = 6
+		XMLTagColumnWidth = 20
+		LengthColumnWidth = 8
+		DataColumnWidth   = 40
+		ColumnPadding     = 5
+	)
+
+	if data.GetMaxDataLength() > DataColumnWidth {
+		tty_width, _, err := term.GetSize(0)
+		if err != nil {
+			fmt.Fprint(os.Stderr, "Warning: unable to determine terminal width")
+		} else {
+			DataColumnWidth = tty_width - IDColumnWidth - XMLTagColumnWidth - LengthColumnWidth - ColumnPadding
+		}
+	}
+
+	var (
 		HeaderStyle = re.NewStyle().Foreground(purple).Bold(true).Align(lipgloss.Center)
 
-		IDColumnStyle     = re.NewStyle().Width(6).Align(lipgloss.Center)
-		XMLTagColumnStyle = re.NewStyle().Width(20).Align(lipgloss.Center)
-		LengthColumnStyle = re.NewStyle().Width(8).Align(lipgloss.Center)
-		DataColumnStyle   = re.NewStyle().Width(40).MaxWidth(40).MaxHeight(100)
+		IDColumnStyle     = re.NewStyle().Width(IDColumnWidth).Align(lipgloss.Center)
+		XMLTagColumnStyle = re.NewStyle().Width(XMLTagColumnWidth).Align(lipgloss.Center)
+		LengthColumnStyle = re.NewStyle().Width(LengthColumnWidth).Align(lipgloss.Center)
+		DataColumnStyle   = re.NewStyle().Width(DataColumnWidth)
 
 		OddRowStyle = re.NewStyle().Foreground(gray)
 
