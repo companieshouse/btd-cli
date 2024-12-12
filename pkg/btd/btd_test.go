@@ -404,18 +404,9 @@ func TestUnitGetMaxDataLength(t *testing.T) {
 	Convey("Given a tag data slice containing valid data", t, func() {
 
 		var tagData TagData = [][]string{
-			{
-				"0001",
-				"mock_tag_1",
-				"0004",
-				"abcd",
-			},
-			{
-				"0002",
-				"mock_tag_2",
-				"0026",
-				"abcdefghijklmnopqrstuvwyxz",
-			},
+			{"0001", "mock_tag_1", "0004", "abcd"},
+			{"0002", "mock_tag_2", "0026", "abcdefghijklmnopqrstuvwyxz"},
+			{"0003", "mock_tag_3", "0001", "a"},
 		}
 
 		Convey("When checking the maximum data length", func() {
