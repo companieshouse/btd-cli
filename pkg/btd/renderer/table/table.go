@@ -59,16 +59,22 @@ func (t *Table) Render(data btd.TagData) string {
 		IDColumnWidth     = 6
 		XMLTagColumnWidth = 20
 		LengthColumnWidth = 8
-		DataColumnWidth   = 40
+		DataColumnWidth   = 10 // miniumum width; dyanmically scaled below
 		ColumnPadding     = 5
 	)
 
-	if data.GetMaxDataLength() > DataColumnWidth {
+	if max_data_length := data.GetMaxDataLength(); max_data_length > DataColumnWidth {
 		tty_width, _, err := term.GetSize(0)
 		if err != nil {
 			fmt.Fprint(os.Stderr, "Warning: unable to determine terminal width")
+		}
+
+		max_data_column_width := tty_width - IDColumnWidth - XMLTagColumnWidth - LengthColumnWidth - ColumnPadding
+
+		if max_data_length > max_data_column_width {
+			DataColumnWidth = max_data_column_width
 		} else {
-			DataColumnWidth = tty_width - IDColumnWidth - XMLTagColumnWidth - LengthColumnWidth - ColumnPadding
+			DataColumnWidth = max_data_length - max_data_column_width
 		}
 	}
 
