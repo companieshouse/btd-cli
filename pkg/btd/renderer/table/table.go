@@ -59,7 +59,7 @@ func (t *Table) Render(data btd.TagData) string {
 		IDColumnWidth     = 6
 		XMLTagColumnWidth = 20
 		LengthColumnWidth = 8
-		DataColumnWidth   = 10 // miniumum width; dyanmically scaled below
+		DataColumnWidth   = 10 // minimum width; dynamically scaled below
 		ColumnPadding     = 5
 	)
 
