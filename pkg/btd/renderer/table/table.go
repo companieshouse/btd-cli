@@ -74,7 +74,7 @@ func (t *Table) Render(data btd.TagData) string {
 		if max_data_length > max_data_column_width {
 			DataColumnWidth = max_data_column_width
 		} else {
-			DataColumnWidth = max_data_length - max_data_column_width
+			DataColumnWidth = max_data_length
 		}
 	}
 
